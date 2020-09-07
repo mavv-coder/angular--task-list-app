@@ -1,0 +1,52 @@
+.card {
+  padding: 2rem;
+  width: 50rem;
+  background-color: white;
+  margin: 1rem auto 0 auto;
+  border-radius: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.input {
+  font-family: inherit;
+  font-size: 1.5rem;
+  width: 100%;
+  outline: none;
+  padding: 0.5rem 2rem;
+  border: none;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  margin: 1rem 0 2rem 0;
+  transition: all 0.1s;
+  &:focus {
+    background-color: #fff;
+    border: 1px solid #999;
+  }
+}
+
+.btn-container {
+  justify-content: flex;
+  align-items: center;
+}
+
+.btn {
+  font-family: inherit;
+  font-weight: 100;
+  font-size: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.6rem;
+  outline: none;
+}
+
+.add-btn {
+  margin-right: 10px;
+  color: #777;
+  background-color: white;
+}
+
+.clear-btn {
+  color: white;
+  background-color: rgb(119, 112, 254);
+  border: 1px solid rgb(119, 112, 254);
+}
