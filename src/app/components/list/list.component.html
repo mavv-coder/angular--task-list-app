@@ -1,1 +1,8 @@
-<p>list works!</p>
+<div class="card">
+  <ul class="list-container">
+    <li class="list-item" *ngFor="let task of taskList">
+      <a class="taks-title">{{ task.name }}</a>
+      <span class="material-icons icon"> remove_circle_outline </span>
+    </li>
+  </ul>
+</div>

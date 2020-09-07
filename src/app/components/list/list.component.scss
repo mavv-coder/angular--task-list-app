@@ -1,0 +1,30 @@
+.card {
+  padding: 1rem 2rem;
+  width: 40rem;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+
+.list-container {
+  list-style: none;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.taks-title {
+  font-size: 1.5rem;
+}
+
+.icon {
+  color: rgb(238, 69, 69);
+}
