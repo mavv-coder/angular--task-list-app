@@ -9,13 +9,13 @@ import { TaskService } from '../../services/task.service';
 export class FormComponent implements OnInit {
   taskName: string;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit(): void {
     this.taskName = '';
   }
 
-  ngOnInit(): void {}
-
-  addTask(e): void {
+  addTask(e: Event): void {
     e.preventDefault();
     this.taskService.addNewTask(this.taskName);
     this.taskName = '';
@@ -23,5 +23,9 @@ export class FormComponent implements OnInit {
 
   updateTask(value: string): void {
     this.taskName = value;
+  }
+  clearInput(e: Event): void {
+    e.preventDefault();
+    this.taskName = '';
   }
 }

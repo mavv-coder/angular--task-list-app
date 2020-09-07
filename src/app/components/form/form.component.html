@@ -15,7 +15,7 @@
         Add
       </button>
       <button *ngIf="!taskName" class="disabled-btn btn" disabled>Add</button>
-      <button class="clear-btn btn">Clear</button>
+      <button class="clear-btn btn" (click)="clearInput($event)">Clear</button>
     </div>
   </form>
 </div>

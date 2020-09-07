@@ -16,6 +16,5 @@ export class ListComponent implements OnInit {
     this.taskService.getTaskList().subscribe((data) => {
       this.taskList = data;
     });
-    console.log(this.taskList);
   }
 }
