@@ -1,0 +1,23 @@
+$font-default: "Roboto", sans-serif;
+$color-dark: #000;
+$color-light: #eee;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.4%;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: $color-light;
+  color: $color-dark;
+}
