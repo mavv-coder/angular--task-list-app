@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
+import { Task } from 'src/app/model/task';
 
 @Component({
   selector: 'app-form',
@@ -7,25 +8,27 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  taskName: string;
+  task: Task;
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.taskName = '';
+    this.taskService.getCurrentTask().subscribe((data) => {
+      this.task = data;
+    });
   }
 
   addTask(e: Event): void {
     e.preventDefault();
-    this.taskService.addNewTask(this.taskName);
-    this.taskName = '';
+    this.taskService.addNewTask(this.task.name);
+    // this.task.name = '';
   }
 
   updateTask(value: string): void {
-    this.taskName = value;
+    this.task.name = value;
   }
   clearInput(e: Event): void {
     e.preventDefault();
-    this.taskName = '';
+    // this.task.name = '';
   }
 }

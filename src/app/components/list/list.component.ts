@@ -17,4 +17,14 @@ export class ListComponent implements OnInit {
       this.taskList = data;
     });
   }
+
+  deleteTask(id: string): void {
+    if (confirm('Are you sure?')) {
+      this.taskService.deleteTask(id);
+    }
+  }
+
+  editTask(task: Task): void {
+    this.taskService.editTask(task);
+  }
 }
