@@ -2,10 +2,19 @@
   <form>
     <div class="input-field">
       <label class="label" for="task">New task</label>
-      <input class="input" type="text" id="task" />
+      <input
+        class="input"
+        [value]="taskName"
+        (input)="updateTask($event.target.value)"
+        type="text"
+        id="task"
+      />
     </div>
     <div class="btn-container">
-      <button class="add-btn btn">Add</button>
+      <button *ngIf="taskName" (click)="addTask($event)" class="add-btn btn">
+        Add
+      </button>
+      <button *ngIf="!taskName" class="disabled-btn btn" disabled>Add</button>
       <button class="clear-btn btn">Clear</button>
     </div>
   </form>
