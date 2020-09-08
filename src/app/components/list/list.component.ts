@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
     }
   }
 
-  editTask(task: Task): void {
-    this.taskService.editTask(task);
+  selectEditTask(task: Task): void {
+    this.taskService.selectEditTask(task);
   }
 }

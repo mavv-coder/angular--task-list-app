@@ -21,14 +21,20 @@ export class FormComponent implements OnInit {
   addTask(e: Event): void {
     e.preventDefault();
     this.taskService.addNewTask(this.task.name);
-    // this.task.name = '';
+    this.taskService.clearCurrentTask();
+  }
+
+  editTask(e: Event): void {
+    e.preventDefault();
+    this.taskService.editTask(this.task);
   }
 
   updateTask(value: string): void {
     this.task.name = value;
   }
+
   clearInput(e: Event): void {
     e.preventDefault();
-    // this.task.name = '';
+    this.taskService.clearCurrentTask();
   }
 }

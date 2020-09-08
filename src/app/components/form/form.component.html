@@ -11,8 +11,15 @@
       />
     </div>
     <div class="btn-container">
-      <button *ngIf="task.name" (click)="addTask($event)" class="add-btn btn">
+      <button
+        *ngIf="task.name && !task.id"
+        (click)="addTask($event)"
+        class="add-btn btn"
+      >
         Add
+      </button>
+      <button *ngIf="task.id" (click)="editTask($event)" class="add-btn btn">
+        Edit
       </button>
       <button *ngIf="!task.name" class="disabled-btn btn" disabled>Add</button>
       <button

@@ -3,7 +3,7 @@
     <li class="list-item" *ngFor="let task of taskList">
       <a class="taks-title">{{ task.name }}</a>
       <div class="btn-container">
-        <span class="material-icons edit-icon" (click)="editTask(task)">
+        <span class="material-icons edit-icon" (click)="selectEditTask(task)">
           create
         </span>
         <span class="material-icons delete-icon" (click)="deleteTask(task.id)">

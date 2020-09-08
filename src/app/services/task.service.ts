@@ -31,6 +31,25 @@ export class TaskService {
     this.taskList.splice(index, 1);
   }
 
+  clearCurrentTask() {
+    this.currentTask.name = '';
+    this.currentTask.id = '';
+  }
+
+  selectEditTask(task: Task): void {
+    this.currentTask.name = task.name;
+    this.currentTask.id = task.id;
+  }
+
+  editTask(task: Task): void {
+    const index = this.taskList.findIndex((x) => x.id === this.currentTask.id);
+    this.taskList.splice(index, 1, task);
+  }
+
+  getCurrentTask(): Observable<Task> {
+    return of(this.currentTask);
+  }
+
   generateId(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (
       c
@@ -39,14 +58,5 @@ export class TaskService {
         v = c == 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
-  }
-
-  editTask(task: Task): void {
-    this.currentTask = task;
-    console.log(this.currentTask);
-  }
-
-  getCurrentTask(): Observable<Task> {
-    return of(this.currentTask);
   }
 }
