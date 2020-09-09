@@ -1,5 +1,5 @@
 <div class="card">
-  <ul class="list-container">
+  <ul *ngIf="taskList.length > 0" class="list-container">
     <li class="list-item" *ngFor="let task of taskList">
       <a class="taks-title">{{ task.name }}</a>
       <div class="btn-container">
@@ -12,4 +12,7 @@
       </div>
     </li>
   </ul>
+  <div class="no-task-msg" *ngIf="taskList.length <= 0">
+    You don't have any tasks. Add a new one!
+  </div>
 </div>

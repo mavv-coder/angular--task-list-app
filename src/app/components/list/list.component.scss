@@ -49,3 +49,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.no-task-msg {
+  width: max-content;
+  margin: 10px auto;
+  color: rgb(85, 85, 85);
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(238, 69, 69);
+}
