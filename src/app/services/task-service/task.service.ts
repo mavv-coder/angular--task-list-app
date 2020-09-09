@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { getTaskList } from '../api/mock-data';
+import { getTaskList } from '../../api/mock-data';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Task } from '../model/task';
+import { Task } from '../../model/task';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +13,16 @@ export class TaskService {
   currentTask$: BehaviorSubject<Task>;
 
   constructor() {
-    getTaskList().subscribe((data) => {
-      this.taskList = data;
+    if (localStorage.getItem('taskList') === null) {
+      getTaskList().subscribe((data) => {
+        this.taskList = data;
+        this.taskList$ = new BehaviorSubject([...this.taskList]);
+      });
+    } else {
+      const TaskListFromLS = JSON.parse(localStorage.getItem('taskList'));
+      this.taskList = TaskListFromLS;
       this.taskList$ = new BehaviorSubject([...this.taskList]);
-    });
+    }
     this.currentTask = { name: '', id: '' };
     this.currentTask$ = new BehaviorSubject(this.currentTask);
   }
@@ -34,12 +40,14 @@ export class TaskService {
     const newTaskList = [...this.taskList, newTask];
     this.taskList = newTaskList;
     this.taskList$.next([...this.taskList]);
+    localStorage.setItem('taskList', JSON.stringify([...this.taskList]));
   }
 
   deleteTask(id: string): void {
     const newTaskList = this.taskList.filter((x) => x.id !== id);
     this.taskList = newTaskList;
     this.taskList$.next([...this.taskList]);
+    localStorage.setItem('taskList', JSON.stringify([...this.taskList]));
   }
 
   clearCurrentTask() {
@@ -58,6 +66,7 @@ export class TaskService {
     newTaskList.splice(index, 1, task);
     this.taskList = newTaskList;
     this.taskList$.next([...this.taskList]);
+    localStorage.setItem('taskList', JSON.stringify([...this.taskList]));
     this.clearCurrentTask();
   }
 
