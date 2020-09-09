@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getTaskList } from '../api/mock-data';
-import { of, Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Task } from '../model/task';
-import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -10,60 +9,56 @@ import { ThrowStmt } from '@angular/compiler';
 export class TaskService {
   taskList: Task[];
   currentTask: Task;
+  taskList$: BehaviorSubject<Task[]>;
+  currentTask$: BehaviorSubject<Task>;
 
   constructor() {
     getTaskList().subscribe((data) => {
       this.taskList = data;
+      this.taskList$ = new BehaviorSubject([...this.taskList]);
     });
     this.currentTask = { name: '', id: '' };
+    this.currentTask$ = new BehaviorSubject(this.currentTask);
   }
 
   getTaskList(): Observable<Task[]> {
-    return of(this.taskList);
+    return this.taskList$.asObservable();
   }
 
   getCurrentTask(): Observable<Task> {
-    return of(this.currentTask);
+    return this.currentTask$.asObservable();
   }
 
-  // Mira aquí, Carlos !!!
   addNewTask(name: string): void {
-    // const newTask = {  id: this.generateId(), name };
-    // this.taskList.push(newTask);
     const newTask = { id: this.generateId(), name };
     const newTaskList = [...this.taskList, newTask];
     this.taskList = newTaskList;
-    console.log(this.taskList);
+    this.taskList$.next([...this.taskList]);
   }
 
-  // Mira aquí, Carlos !!!
   deleteTask(id: string): void {
-    // const index = this.taskList.findIndex((x) => x.id === id);
-    // this.taskList.splice(index, 1);
     const newTaskList = this.taskList.filter((x) => x.id !== id);
     this.taskList = newTaskList;
-    console.log(this.taskList);
+    this.taskList$.next([...this.taskList]);
   }
 
-  // Mira aquí, Carlos !!!
   clearCurrentTask() {
-    // this.currentTask.name = '';
-    // this.currentTask.id = '';
     this.currentTask = { name: '', id: '' };
-    console.log(this.currentTask);
+    this.currentTask$.next({ ...this.currentTask });
   }
 
-  // Mira aquí, Carlos !!!
   selectEditTask(task: Task): void {
-    // this.currentTask.name = task.name;
-    // this.currentTask.id = task.id;
     this.currentTask = task;
-    console.log(this.currentTask);
+    this.currentTask$.next({ ...this.currentTask });
   }
 
   editTask(task: Task): void {
     const index = this.taskList.findIndex((x) => x.id === this.currentTask.id);
-    this.taskList.splice(index, 1, task);
+    const newTaskList = this.taskList;
+    newTaskList.splice(index, 1, task);
+    this.taskList = newTaskList;
+    this.taskList$.next([...this.taskList]);
+    this.clearCurrentTask();
   }
 
   generateId(): string {

@@ -26,7 +26,7 @@ export class FormComponent implements OnInit {
 
   editTask(e: Event): void {
     e.preventDefault();
-    this.taskService.editTask(this.task);
+    this.taskService.editTask({ ...this.task });
   }
 
   updateTask(value: string): void {

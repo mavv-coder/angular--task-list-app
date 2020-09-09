@@ -1,7 +1,8 @@
 <div class="card">
   <form>
     <div class="input-field">
-      <label class="label" for="task">New task</label>
+      <label *ngIf="!task.id" class="label" for="task">Add new task</label>
+      <label *ngIf="task.id" class="label" for="task">Edit task</label>
       <input
         class="input"
         [value]="task.name"
@@ -18,7 +19,7 @@
       >
         Add
       </button>
-      <button *ngIf="task.id" (click)="editTask($event)" class="add-btn btn">
+      <button *ngIf="task.id" (click)="editTask($event)" class="edit-btn btn">
         Edit
       </button>
       <button *ngIf="!task.name" class="disabled-btn btn" disabled>Add</button>
